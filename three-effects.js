@@ -54,7 +54,7 @@ const packetField = (scene) => {
   for (let index = 0; index < laneCount; index += 1) {
     const y = (index - (laneCount - 1) / 2) * .62;
     const isAlert = index === laneCount - 2;
-    packets.push(addPacketPath(group, y, (index % 3) * -.45, isAlert ? alertRed : index % 2 ? cyan : blue, index / laneCount, .035 + index * .002));
+    packets.push(addPacketPath(group, y, (index % 3) * -.45, isAlert ? alertRed : index % 2 ? cyan : blue, index / laneCount, .000012 + index * .0000007));
   }
 
   const nodeCount = mobile ? 28 : 64;
@@ -74,8 +74,8 @@ const packetField = (scene) => {
       const phase = (time * packet.userData.speed + packet.userData.offset) % 1;
       packet.position.copy(packet.userData.curve.getPointAt(phase));
     });
-    group.rotation.y += (pointer.x * .045 - group.rotation.y) * .025;
-    group.rotation.x += (pointer.y * .03 - group.rotation.x) * .025;
+    group.rotation.y += (pointer.x * .025 - group.rotation.y) * .008;
+    group.rotation.x += (pointer.y * .018 - group.rotation.x) * .008;
     group.position.y = scrollProgress * -.7;
   };
 };
