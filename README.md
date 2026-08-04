@@ -1,6 +1,6 @@
 # Csilla Csaszar — Cybersecurity Portfolio
 
-A responsive, dependency-free portfolio built with HTML, CSS, and JavaScript.
+A responsive portfolio built with HTML, CSS, JavaScript, and a lightweight Three.js hero visualization.
 
 ## Preview locally
 
