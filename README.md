@@ -4,7 +4,7 @@ A responsive portfolio built with HTML, CSS, and JavaScript.
 
 ## Preview locally
 
-Open `index.html` in any modern browser. No build step is required.
+Serve the folder with any local static server and open `index.html`. For example, run `npx serve .` from this directory. No build step is required; using a server allows the browser to load the local Three.js module.
 
 ## Update later
 
