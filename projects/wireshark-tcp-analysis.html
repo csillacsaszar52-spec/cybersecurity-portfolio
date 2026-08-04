@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Detailed Wireshark TCP traffic analysis case study by Csilla Csaszar.">
+  <meta name="theme-color" content="#08111f">
+  <title>Wireshark TCP Traffic Analysis | Csilla Csaszar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="case-study-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-grid" aria-hidden="true"></div>
+
+  <header class="site-header scrolled">
+    <a class="brand" href="../index.html" aria-label="Csilla Csaszar, portfolio home">
+      <span class="brand-mark">CC</span><span>Csilla Csaszar</span>
+    </a>
+    <nav class="case-nav" aria-label="Case study navigation">
+      <a href="../index.html#projects">← All projects</a>
+      <a class="nav-cta" href="https://www.linkedin.com/in/csillacsaszar" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="case-hero section-shell">
+        <p class="eyebrow"><span class="status-dot"></span> Case study 001 · Network analysis</p>
+        <h1>Wireshark TCP<br>Traffic Analysis</h1>
+        <p class="case-deck">Packet-level analysis of an HTTP file upload, from connection establishment through acknowledgments, flow control, throughput, and congestion behavior.</p>
+        <div class="case-meta">
+          <div><span>ROLE</span><strong>Network Analyst</strong></div>
+          <div><span>TOOLS</span><strong>Wireshark · TCP/IP · HTTP</strong></div>
+          <div><span>ENVIRONMENT</span><strong>Controlled academic lab</strong></div>
+          <div><span>DATE</span><strong>June 2026</strong></div>
+        </div>
+      </header>
+
+      <div class="case-hero-visual section-shell">
+        <img src="../assets/projects/wireshark/time-sequence-graph.png" alt="Wireshark Stevens time-sequence graph showing TCP sequence-number growth during the upload">
+        <div class="hero-visual-caption"><span>EXHIBIT 01</span><p>Time-sequence graph used to examine TCP transmission growth and congestion behavior.</p></div>
+      </div>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>01</span> Objective</div>
+        <div class="case-content case-intro">
+          <h2>Understand the complete TCP exchange—not just isolated packets.</h2>
+          <p>The investigation captured an HTTP upload of a 152,335-byte text file to a remote lab server. The goal was to reconstruct the session and explain how TCP established the connection, transported the payload, acknowledged delivery, managed receiver capacity, and adjusted its sending behavior.</p>
+          <div class="case-question-grid">
+            <div><span>01</span><p>How was the connection established and identified?</p></div>
+            <div><span>02</span><p>How quickly were data segments acknowledged?</p></div>
+            <div><span>03</span><p>Did loss, retransmission, or receiver pressure affect delivery?</p></div>
+            <div><span>04</span><p>What did the trace reveal about throughput and congestion control?</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>02</span> Method</div>
+        <div class="case-content">
+          <h2>Capture, isolate, inspect, calculate, validate.</h2>
+          <ol class="method-list">
+            <li><span>01</span><div><h3>Generate known traffic</h3><p>Uploaded a known text file over HTTP while capturing the active network interface.</p></div></li>
+            <li><span>02</span><div><h3>Isolate the session</h3><p>Identified the relevant client/server conversation and isolated TCP stream 26.</p></div></li>
+            <li><span>03</span><div><h3>Inspect protocol fields</h3><p>Reviewed flags, sequence numbers, acknowledgments, payload lengths, timestamps, and advertised window values.</p></div></li>
+            <li><span>04</span><div><h3>Test specific conditions</h3><p>Applied analysis filters for standard, fast, and spurious retransmissions.</p></div></li>
+            <li><span>05</span><div><h3>Calculate performance</h3><p>Calculated RTT per segment and end-to-end throughput using capture timestamps and content length.</p></div></li>
+            <li><span>06</span><div><h3>Visualize behavior</h3><p>Used the Stevens time-sequence graph to evaluate early transfer growth and congestion behavior.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="evidence-band">
+        <div class="section-shell evidence-grid">
+          <figure>
+            <img src="../assets/projects/wireshark/tcp-syn.png" alt="Wireshark packet details highlighting the TCP SYN flag">
+            <figcaption><span>EXHIBIT 02 · PACKET 177</span><p>Client SYN: relative sequence number 0 and SYN flag set.</p></figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/projects/wireshark/tcp-synack.png" alt="Wireshark packet details highlighting SYN and ACK flags">
+            <figcaption><span>EXHIBIT 03 · PACKET 179</span><p>Server SYN-ACK: sequence 0, acknowledgment 1, both flags set.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>03</span> Connection</div>
+        <div class="case-content">
+          <h2>Three packets established the session.</h2>
+          <div class="handshake-diagram" aria-label="TCP three-way handshake sequence">
+            <div class="endpoint-row"><span>CLIENT</span><span>SERVER : 80</span></div>
+            <div><span>SYN · SEQ 0</span><i class="flow-right"></i><small>PACKET 177</small></div>
+            <div><small>PACKET 179</small><i class="flow-left"></i><span>SYN, ACK · ACK 1</span></div>
+            <div><span>ACK · SEQ 1</span><i class="flow-right"></i><small>PACKET 180</small></div>
+          </div>
+          <p>The client initiated the exchange with a SYN. The server acknowledged the client’s initial sequence number by returning ACK 1, while also setting its own SYN flag. The client’s final ACK completed the handshake. Relative sequence numbering made the relationship between the initial sequence and acknowledgment values explicit.</p>
+          <div class="key-finding"><span>KEY OBSERVATION</span><p>The connection state was confirmed through both the displayed flag labels and the underlying TCP flags field—not inferred from packet order alone.</p></div>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>04</span> RTT analysis</div>
+        <div class="case-content">
+          <h2>Round-trip timing stayed consistent across the first six data segments.</h2>
+          <p>Each segment’s send time was paired with the timestamp of its corresponding acknowledgment. Five measurements clustered near 59 milliseconds; the sixth completed faster at 43.7 milliseconds.</p>
+          <div class="data-table-wrap">
+            <table>
+              <thead><tr><th>Segment</th><th>Sequence</th><th>Sent (s)</th><th>ACK</th><th>ACK time (s)</th><th>RTT (ms)</th></tr></thead>
+              <tbody>
+                <tr><td>181</td><td>1</td><td>11.5794542</td><td>186</td><td>11.6355929</td><td>56.14</td></tr>
+                <tr><td>182</td><td>586</td><td>11.5797009</td><td>187</td><td>11.6394859</td><td>59.79</td></tr>
+                <tr><td>183</td><td>4,682</td><td>11.5799910</td><td>189</td><td>11.6398776</td><td>59.89</td></tr>
+                <tr><td>184</td><td>8,778</td><td>11.5801569</td><td>190</td><td>11.6398776</td><td>59.72</td></tr>
+                <tr><td>185</td><td>12,874</td><td>11.5804475</td><td>191</td><td>11.6398776</td><td>59.43</td></tr>
+                <tr><td>188</td><td>14,334</td><td>11.6395365</td><td>193</td><td>11.6832703</td><td>43.73</td></tr>
+              </tbody>
+              <tfoot><tr><td colspan="5">Mean RTT</td><td>56.45 ms</td></tr></tfoot>
+            </table>
+          </div>
+          <figure class="case-figure">
+            <img src="../assets/projects/wireshark/rtt-analysis.png" alt="Wireshark timestamp analysis for a TCP segment">
+            <figcaption><span>EXHIBIT 04</span><p>Packet timing fields provided evidence for pairing transmitted segments with acknowledgments.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>05</span> Flow & reliability</div>
+        <div class="case-content">
+          <h2>The receiver did not constrain the sender, and the trace showed no retransmissions.</h2>
+          <div class="finding-stats">
+            <div><span>MINIMUM RECEIVE WINDOW</span><strong>63,744 B</strong><p>Available capacity remained well above zero.</p></div>
+            <div><span>TYPICAL ACK INCREMENT</span><strong>4,096 B</strong><p>Observed in successive acknowledgment values.</p></div>
+            <div><span>RETRANSMISSIONS</span><strong>0</strong><p>Standard, fast, and spurious filters returned no packets.</p></div>
+          </div>
+          <div class="filter-block">
+            <code>tcp.stream eq 26 and tcp.analysis.retransmission</code>
+            <code>tcp.stream eq 26 and tcp.analysis.fast_retransmission</code>
+            <code>tcp.stream eq 26 and tcp.analysis.spurious_retransmission</code>
+          </div>
+          <figure class="case-figure">
+            <img src="../assets/projects/wireshark/retransmission-filter.png" alt="Wireshark retransmission filter returning no matching packets">
+            <figcaption><span>EXHIBIT 05</span><p>An empty result set confirmed that the selected stream contained no standard TCP retransmissions.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>06</span> Throughput</div>
+        <div class="case-content">
+          <h2>Measured application transfer throughput: approximately 668 KB/s.</h2>
+          <div class="calculation">
+            <div><span>FILE SIZE</span><strong>152,335 bytes</strong></div>
+            <b>÷</b>
+            <div><span>TRANSFER DURATION</span><strong>0.2280365 seconds</strong></div>
+            <b>=</b>
+            <div class="calculation-result"><span>THROUGHPUT</span><strong>667,999.59 B/s</strong></div>
+          </div>
+          <p>The duration was measured from the first TCP data segment at 11.5794542 seconds to the HTTP 200 OK response at 11.8074907 seconds. Dividing the HTTP content length by that interval produced the reported rate. This is an application-transfer calculation based on the selected capture boundaries, not a claim about maximum link capacity.</p>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>07</span> Congestion behavior</div>
+        <div class="case-content">
+          <h2>The sequence graph showed rapid early growth followed by a less aggressive progression.</h2>
+          <p>The Stevens graph plotted client-to-server sequence numbers over time. The steep initial rise was consistent with TCP slow start as the sender expanded in-flight data in response to acknowledgments. Growth became less aggressive near 100 KB, suggesting a transition toward congestion avoidance. The capture did not form a perfectly smooth textbook curve because real packet timing, delayed acknowledgments, capture boundaries, and a short transfer all affect the plotted shape.</p>
+          <figure class="case-figure case-figure-large">
+            <img src="../assets/projects/wireshark/time-sequence-graph.png" alt="Stevens graph plotting TCP sequence numbers against time">
+            <figcaption><span>EXHIBIT 06</span><p>Sequence-number progression during the client-to-server upload.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section case-conclusion section-shell">
+        <div class="case-section-label"><span>08</span> Conclusion</div>
+        <div class="case-content">
+          <h2>The trace documented a clean, stable TCP transfer.</h2>
+          <p>The session established correctly, maintained consistent round-trip timing, retained sufficient receive-buffer capacity, and completed without detected retransmissions. The analysis connected individual header fields and timestamps to higher-level conclusions about reliability, flow control, throughput, and congestion behavior.</p>
+          <div class="outcomes">
+            <span>Connection state validated</span><span>RTT quantified</span><span>Flow control assessed</span><span>Loss checks completed</span><span>Throughput calculated</span><span>Congestion behavior interpreted</span>
+          </div>
+          <a class="button button-primary" href="../index.html#projects">← Return to selected work</a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer section-shell">
+    <span>© <span id="year"></span> Csilla Csaszar</span>
+    <span>Case study 001 · Network analysis</span>
+    <a href="#main">Back to top ↑</a>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>

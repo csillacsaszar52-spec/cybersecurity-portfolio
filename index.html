@@ -117,61 +117,21 @@
           <p>Hands-on investigations, documented with evidence.</p>
         </div>
 
-        <article class="featured-project reveal">
-          <div class="project-visual" aria-label="Stylized TCP traffic visualization">
-            <div class="visual-head"><span>TCP STREAM / ANALYSIS</span><span class="live-pill">CAPTURE COMPLETE</span></div>
-            <div class="packet-chart">
-              <div class="chart-labels"><span>CLIENT</span><span>SERVER</span></div>
-              <div class="packet-row"><span class="packet-name">SYN</span><span class="packet-line right"></span><small>SEQ 0</small></div>
-              <div class="packet-row"><small>ACK 1</small><span class="packet-line left"></span><span class="packet-name">SYN, ACK</span></div>
-              <div class="packet-row"><span class="packet-name">ACK</span><span class="packet-line right"></span><small>ESTABLISHED</small></div>
-              <div class="packet-row data"><span class="packet-name">HTTP POST</span><span class="packet-line right"></span><small>152,335 B</small></div>
-              <div class="packet-row"><small>200 OK</small><span class="packet-line left"></span><span class="packet-name">ACK</span></div>
+        <div class="project-gallery reveal">
+          <a class="project-thumbnail" href="projects/wireshark-tcp-analysis.html" aria-label="View the Wireshark TCP traffic analysis case study">
+            <div class="thumbnail-image">
+              <img src="assets/projects/wireshark/time-sequence-graph.png" alt="Wireshark TCP time-sequence graph from the file-transfer analysis">
+              <span class="thumbnail-index">001</span>
+              <span class="thumbnail-action">View full case study <b aria-hidden="true">↗</b></span>
             </div>
-            <div class="visual-stats">
-              <div><span>AVG RTT</span><strong>56.4 ms</strong></div>
-              <div><span>THROUGHPUT</span><strong>668 KB/s</strong></div>
-              <div><span>RETRANSMISSIONS</span><strong>0</strong></div>
+            <div class="thumbnail-copy">
+              <div>
+                <p class="project-number">NETWORK ANALYSIS · WIRESHARK</p>
+                <h2>TCP Traffic Analysis</h2>
+              </div>
+              <p>Handshake, sequencing, RTT, throughput, receiver windows, retransmissions, and congestion behavior.</p>
             </div>
-          </div>
-
-          <div class="project-copy">
-            <p class="project-number">CASE STUDY 001 · NETWORK ANALYSIS</p>
-            <h2>Tracing a TCP file transfer with Wireshark</h2>
-            <p>Captured and examined a live HTTP file upload to understand how TCP establishes a connection, transports data, acknowledges delivery, and manages congestion.</p>
-            <div class="project-findings">
-              <h3>What I investigated</h3>
-              <ul>
-                <li>Three-way handshake and HTTP POST exchange</li>
-                <li>Sequence numbers, ACKs, segment size, and RTT</li>
-                <li>Receiver window, retransmissions, and throughput</li>
-                <li>Slow start and congestion-avoidance behavior</li>
-              </ul>
-            </div>
-            <div class="tag-list"><span>Wireshark</span><span>TCP/IP</span><span>HTTP</span><span>Packet Analysis</span></div>
-          </div>
-        </article>
-
-        <div class="project-grid reveal">
-          <article class="project-card">
-            <p class="project-number">LAB ENVIRONMENT</p>
-            <h3>Enterprise security monitoring</h3>
-            <p>Multi-system event collection and investigation using Windows and Linux telemetry.</p>
-            <div class="tag-list"><span>Wazuh</span><span>Splunk</span><span>Event Viewer</span><span>Ubuntu</span></div>
-          </article>
-          <article class="project-card">
-            <p class="project-number">LAB ENVIRONMENT</p>
-            <h3>Vulnerability assessment</h3>
-            <p>Host discovery, service enumeration, vulnerability evaluation, remediation, and validation.</p>
-            <div class="tag-list"><span>OpenVAS</span><span>Nmap</span><span>Windows Server</span></div>
-          </article>
-          <article class="project-card home-lab-card">
-            <p class="project-number">ONGOING PRACTICE</p>
-            <h3>Cybersecurity home lab</h3>
-            <p>Virtual enterprise environment for defensive testing, system administration, packet analysis, and hardening.</p>
-            <div class="lab-nodes" aria-hidden="true"><span>KALI</span><span>WIN SRV</span><span>UBUNTU</span><span>META2</span></div>
-            <div class="tag-list"><span>VMware</span><span>Active Directory</span><span>Linux</span></div>
-          </article>
+          </a>
         </div>
       </div>
     </section>
