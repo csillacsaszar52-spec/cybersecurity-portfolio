@@ -1,0 +1,9 @@
+# Local PDF extraction dependency
+.portfolio-tools/
+
+# Empty local planning placeholder
+Cyber Secerity Portfolio
+
+# Operating-system files
+.DS_Store
+Thumbs.db
