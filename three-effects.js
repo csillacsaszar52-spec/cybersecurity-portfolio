@@ -34,13 +34,13 @@ const addPacketPath = (group, y, z, color, offset, speed) => {
   ]);
   const path = new THREE.Line(
     new THREE.BufferGeometry().setFromPoints(curve.getPoints(40)),
-    new THREE.LineBasicMaterial({ color, transparent: true, opacity: .16 })
+    new THREE.LineBasicMaterial({ color, transparent: true, opacity: .32 })
   );
   group.add(path);
 
   const packet = new THREE.Mesh(
-    new THREE.BoxGeometry(.34, .08, .08),
-    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: .9 })
+    new THREE.BoxGeometry(.48, .11, .11),
+    new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 1 })
   );
   packet.userData = { curve, offset, speed };
   group.add(packet);
@@ -66,7 +66,7 @@ const packetField = (scene) => {
   }
   const nodesGeometry = new THREE.BufferGeometry();
   nodesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  group.add(new THREE.Points(nodesGeometry, new THREE.PointsMaterial({ color: cyan, size: .035, transparent: true, opacity: .45 })));
+  group.add(new THREE.Points(nodesGeometry, new THREE.PointsMaterial({ color: cyan, size: .065, transparent: true, opacity: .72 })));
   scene.add(group);
 
   return (time) => {
@@ -84,13 +84,13 @@ const packetScan = (scene, mount) => {
   const group = new THREE.Group();
   const grid = new THREE.GridHelper(18, mobile ? 12 : 24, cyan, blue);
   grid.material.transparent = true;
-  grid.material.opacity = .09;
+  grid.material.opacity = .18;
   grid.rotation.x = Math.PI / 2;
   group.add(grid);
 
   const packetGeometry = new THREE.BoxGeometry(.4, .08, .08);
   const packets = Array.from({ length: mobile ? 5 : 11 }, (_, index) => {
-    const mesh = new THREE.Mesh(packetGeometry, new THREE.MeshBasicMaterial({ color: index === 7 ? alertRed : cyan, transparent: true, opacity: .55 }));
+    const mesh = new THREE.Mesh(packetGeometry, new THREE.MeshBasicMaterial({ color: index === 7 ? alertRed : cyan, transparent: true, opacity: .82 }));
     mesh.position.set(THREE.MathUtils.randFloatSpread(13), THREE.MathUtils.randFloatSpread(3), THREE.MathUtils.randFloatSpread(2));
     mesh.userData.speed = .008 + Math.random() * .009;
     group.add(mesh);
