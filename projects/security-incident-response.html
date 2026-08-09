@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Security incident investigation and response case study using Wazuh and TheHive by Csilla Csaszar.">
+  <meta name="theme-color" content="#08111f">
+  <title>Security Incident Investigation & Response | Csilla Csaszar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="case-study-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-grid" aria-hidden="true"></div>
+
+  <header class="site-header scrolled">
+    <a class="brand" href="../index.html" aria-label="Csilla Csaszar, portfolio home">
+      <span class="brand-mark">CC</span><span>Csilla Csaszar</span>
+    </a>
+    <nav class="case-nav" aria-label="Case study navigation">
+      <a href="../index.html#projects">← All projects</a>
+      <a class="nav-cta" href="https://www.linkedin.com/in/csillacsaszar" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="case-hero section-shell">
+        <p class="eyebrow"><span class="status-dot"></span> Case study 002 · Incident response</p>
+        <h1>Security Incident<br>Investigation & Response</h1>
+        <p class="case-deck">A structured investigation of unauthorized web content using SIEM telemetry, file integrity monitoring, case management, containment, root-cause analysis, recovery, and remediation planning.</p>
+        <div class="case-meta">
+          <div><span>ROLE</span><strong>Incident Response Analyst</strong></div>
+          <div><span>TOOLS</span><strong>Wazuh · TheHive · Linux</strong></div>
+          <div><span>ENVIRONMENT</span><strong>Controlled academic lab</strong></div>
+          <div><span>DATE</span><strong>July 2026</strong></div>
+        </div>
+      </header>
+
+      <div class="case-hero-visual section-shell">
+        <img src="../assets/projects/incident-response/figure-08.png" alt="Wazuh integrity monitoring dashboard listing modified blog files">
+        <div class="hero-visual-caption"><span>EXHIBIT 01</span><p>File integrity events used to investigate unauthorized changes within the monitored blog directory.</p></div>
+      </div>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>01</span> Objective</div>
+        <div class="case-content case-intro">
+          <h2>Investigate, contain, and recover from unauthorized changes to a web application.</h2>
+          <p>The lab centered on suspicious content added to an internal blog. The objective was to validate monitoring coverage, identify affected systems, document the case, investigate file and authentication evidence, contain compromised servers, restore service, and define corrective actions for future incidents.</p>
+          <div class="case-question-grid">
+            <div><span>01</span><p>Were the required logs and application files actively monitored?</p></div>
+            <div><span>02</span><p>Which systems were serving the unauthorized content?</p></div>
+            <div><span>03</span><p>What file and authentication evidence supported the investigation?</p></div>
+            <div><span>04</span><p>How could recovery and future remediation be made repeatable?</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>02</span> Method</div>
+        <div class="case-content">
+          <h2>Validate coverage, open a case, contain, investigate, restore, improve.</h2>
+          <ol class="method-list">
+            <li><span>01</span><div><h3>Validate monitoring</h3><p>Reviewed Wazuh log collection and real-time file integrity monitoring for the web servers and blog directory.</p></div></li>
+            <li><span>02</span><div><h3>Confirm the incident</h3><p>Observed the unauthorized blog content and documented the compromise in TheHive.</p></div></li>
+            <li><span>03</span><div><h3>Identify and contain affected systems</h3><p>Determined which origin servers delivered the content and recorded their removal from the load-balancer configuration.</p></div></li>
+            <li><span>04</span><div><h3>Investigate root cause</h3><p>Reviewed integrity events, SSH activity, authorized keys, file hashes, and system-log search results.</p></div></li>
+            <li><span>05</span><div><h3>Restore service</h3><p>Documented restoration of the affected origin servers from backups.</p></div></li>
+            <li><span>06</span><div><h3>Standardize remediation</h3><p>Added credential-revocation and firewall-rule tasks to a reusable TheHive case template.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="evidence-band">
+        <div class="section-shell evidence-grid">
+          <figure>
+            <img src="../assets/projects/incident-response/figure-01.png" alt="Wazuh log collection configuration for the web1 server">
+            <figcaption><span>EXHIBIT 02 · LOG COLLECTION</span><p>Wazuh displayed the log sources configured for analysis on the web1 agent.</p></figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/projects/incident-response/figure-02.png" alt="Wazuh real-time file integrity monitoring settings for the blog directory">
+            <figcaption><span>EXHIBIT 03 · FILE INTEGRITY</span><p>The <code>/home/user/blog</code> directory was configured for real-time monitoring and checksum validation.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>03</span> Detection & case management</div>
+        <div class="case-content">
+          <h2>Suspicious content became a structured incident-response case.</h2>
+          <p>The investigation began after unauthorized content was observed in a blog post. TheHive was used to organize the response into discrete tasks for identifying the compromise, determining the affected origin servers, mitigating those servers, finding the root cause, and restoring service.</p>
+          <div class="key-finding"><span>KEY OBSERVATION</span><p>The case record connected technical evidence to assigned response actions, keeping investigation and containment work visible in one timeline.</p></div>
+          <figure class="case-figure">
+            <img src="../assets/projects/incident-response/figure-05.png" alt="TheHive Identify Compromise task for a suspicious footer incident">
+            <figcaption><span>EXHIBIT 04</span><p>The “Identify Compromise” task recorded the initial investigation of suspicious website content.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>04</span> Containment</div>
+        <div class="case-content">
+          <h2>Affected origin servers were identified and removed from service.</h2>
+          <p>The case workflow included determining which internal servers delivered the compromised pages and then disabling the affected origin servers in the load-balancer configuration. Each action was captured in TheHive task logs.</p>
+          <div class="finding-stats">
+            <div><span>CASE PLATFORM</span><strong>TheHive</strong><p>Tasks and logs organized the response workflow.</p></div>
+            <div><span>CONTAINMENT TARGET</span><strong>Origin servers</strong><p>Affected systems were removed from load balancing.</p></div>
+            <div><span>EVIDENCE SOURCE</span><strong>Wazuh</strong><p>Integrity and security events supported the investigation.</p></div>
+          </div>
+          <figure class="case-figure">
+            <img src="../assets/projects/incident-response/figure-07.png" alt="TheHive task for mitigating compromised origin servers">
+            <figcaption><span>EXHIBIT 05</span><p>The containment task documented disabling affected origin servers in the load-balancer configuration.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>05</span> Root-cause evidence</div>
+        <div class="case-content">
+          <h2>File changes and SSH activity provided two complementary evidence paths.</h2>
+          <p>Wazuh integrity events identified modified files under the monitored blog path. Security-event details exposed SSH log information, including the source address and key fingerprint used during an accepted public-key login. The authorized-keys file was then reviewed so fingerprints could be compared as part of the root-cause investigation.</p>
+          <figure class="case-figure">
+            <img src="../assets/projects/incident-response/figure-09.png" alt="Wazuh SSH security event showing accepted public-key login details">
+            <figcaption><span>EXHIBIT 06</span><p>The expanded SSH event supplied authentication details for the investigation.</p></figcaption>
+          </figure>
+          <figure class="case-figure">
+            <img src="../assets/projects/incident-response/figure-10.png" alt="Terminal displaying authorized SSH key fingerprints beside Wazuh event details">
+            <figcaption><span>EXHIBIT 07</span><p>Authorized-key fingerprints were generated for comparison with the SSH event evidence.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>06</span> Integrity validation</div>
+        <div class="case-content">
+          <h2>SHA-256 comparison confirmed the blog file and its backup were different.</h2>
+          <p>Hash values were calculated for the current and backup copies of the blog file. The different SHA-256 results established that the files were not identical, adding direct integrity evidence to the investigation.</p>
+          <figure class="case-figure">
+            <img src="../assets/projects/incident-response/figure-13.png" alt="PowerShell SHA-256 output showing different hashes for current and backup blog files">
+            <figcaption><span>EXHIBIT 08</span><p>Different SHA-256 values demonstrated a content difference between the current file and backup.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section section-shell">
+        <div class="case-section-label"><span>07</span> Recovery & remediation</div>
+        <div class="case-content">
+          <h2>Recovery restored systems; reusable tasks strengthened the next response.</h2>
+          <p>The recovery task documented restoring the affected origin servers from backups. The response process was then extended with reusable TheHive tasks for revoking compromised credentials and adding firewall rules to block malicious addresses and restrict access.</p>
+          <div class="outcomes">
+            <span>Restore from backup</span><span>Identify affected accounts</span><span>Reset passwords</span><span>Remove unauthorized SSH keys</span><span>Block malicious IP addresses</span><span>Document remediation</span>
+          </div>
+          <div class="evidence-grid">
+            <figure>
+              <img src="../assets/projects/incident-response/figure-15.png" alt="TheHive template task for revoking compromised credentials">
+              <figcaption><span>EXHIBIT 09</span><p>Credential remediation was defined as a repeatable case-template task.</p></figcaption>
+            </figure>
+            <figure>
+              <img src="../assets/projects/incident-response/figure-16.png" alt="TheHive template task for adding firewall rules">
+              <figcaption><span>EXHIBIT 10</span><p>Firewall remediation captured blocking and access-control steps for future cases.</p></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section case-conclusion section-shell">
+        <div class="case-section-label"><span>08</span> Conclusion</div>
+        <div class="case-content">
+          <h2>The lab connected detection evidence to a documented response lifecycle.</h2>
+          <p>Wazuh supplied centralized log and integrity evidence, while TheHive turned the investigation into traceable tasks covering identification, containment, root-cause analysis, recovery, and remediation. The result was both an incident record and a reusable response structure for similar events.</p>
+          <div class="outcomes">
+            <span>Monitoring validated</span><span>Incident documented</span><span>Systems contained</span><span>Evidence correlated</span><span>Integrity checked</span><span>Recovery recorded</span>
+          </div>
+          <a class="button button-primary" href="../index.html#projects">← Return to selected work</a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer section-shell">
+    <span>© <span id="year"></span> Csilla Csaszar</span>
+    <span>Case study 002 · Incident response</span>
+    <a href="#main">Back to top ↑</a>
+  </footer>
+  <script src="../script.js"></script>
+</body>
+</html>
