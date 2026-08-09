@@ -141,18 +141,18 @@ button { font: inherit; }
 .lab-nodes span { z-index: 1; display: grid; place-items: center; width: 47px; height: 31px; color: var(--cyan); background: #0b1a29; border: 1px solid #29485b; font: .5rem "DM Mono", monospace; }
 
 /* Project gallery */
-.project-gallery { border-top: 1px solid var(--line); }
-.project-thumbnail { display: grid; grid-template-columns: 1.15fr .85fr; border-bottom: 1px solid var(--line); transition: background .25s ease; }
+.project-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.project-thumbnail { min-width: 0; display: flex; flex-direction: column; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .25s ease; }
 .project-thumbnail:hover { background: rgba(82,229,208,.025); }
-.thumbnail-image { position: relative; min-height: 430px; overflow: hidden; border-right: 1px solid var(--line); background: #06101b; }
+.thumbnail-image { position: relative; min-height: 320px; overflow: hidden; border-bottom: 1px solid var(--line); background: #06101b; }
 .thumbnail-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.78) brightness(.76); transition: transform .45s ease, filter .45s ease; }
 .project-thumbnail:hover .thumbnail-image img { transform: scale(1.025); filter: saturate(1) brightness(.9); }
 .thumbnail-index, .thumbnail-action { position: absolute; z-index: 1; top: 18px; padding: 7px 10px; background: rgba(8,17,31,.88); border: 1px solid var(--line); font: .62rem "DM Mono", monospace; letter-spacing: .08em; }
 .thumbnail-index { left: 18px; color: var(--cyan); }
 .thumbnail-action { right: 18px; color: #c5d3df; }
 .thumbnail-action b { margin-left: 8px; color: var(--cyan); }
-.thumbnail-copy { display: flex; flex-direction: column; justify-content: space-between; gap: 60px; padding: 45px 40px; }
-.thumbnail-copy h2 { margin: 16px 0 0; font-size: clamp(2rem, 3.5vw, 3.25rem); line-height: 1.04; letter-spacing: -.055em; }
+.thumbnail-copy { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 45px; padding: 38px 34px; }
+.thumbnail-copy h2 { margin: 16px 0 0; font-size: clamp(1.8rem, 2.8vw, 2.7rem); line-height: 1.04; letter-spacing: -.055em; }
 .thumbnail-copy > p { margin: 0; color: #92a6b7; }
 
 /* Case study */
@@ -268,8 +268,8 @@ tfoot td { font-weight: 500; }
   .project-visual { min-height: 480px; border-right: 0; border-bottom: 1px solid var(--line); }
   .project-grid { grid-template-columns: 1fr 1fr; }
   .home-lab-card { grid-column: 1 / -1; }
-  .project-thumbnail { grid-template-columns: 1fr; }
-  .thumbnail-image { min-height: 380px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .project-gallery { grid-template-columns: 1fr; }
+  .thumbnail-image { min-height: 380px; }
   .case-section { grid-template-columns: 150px 1fr; gap: 35px; }
   .case-meta { grid-template-columns: 1fr 1fr; }
   .finding-stats { grid-template-columns: 1fr; }
