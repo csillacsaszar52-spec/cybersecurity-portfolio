@@ -40,7 +40,7 @@
       </header>
 
       <div class="case-hero-visual section-shell">
-        <img src="../assets/projects/incident-response/figure-08.png" alt="Wazuh integrity monitoring dashboard listing modified blog files">
+        <img src="../assets/projects/incident-response/figure-08-cropped.png" alt="Wazuh integrity monitoring dashboard listing modified blog files">
         <div class="hero-visual-caption"><span>EXHIBIT 01</span><p>File integrity events used to investigate unauthorized changes within the monitored blog directory.</p></div>
       </div>
 
@@ -76,11 +76,11 @@
       <section class="evidence-band">
         <div class="section-shell evidence-grid">
           <figure>
-            <img src="../assets/projects/incident-response/figure-01.png" alt="Wazuh log collection configuration for the web1 server">
+            <img src="../assets/projects/incident-response/figure-01-cropped.png" alt="Wazuh log collection configuration for the web1 server">
             <figcaption><span>EXHIBIT 02 · LOG COLLECTION</span><p>Wazuh displayed the log sources configured for analysis on the web1 agent.</p></figcaption>
           </figure>
           <figure>
-            <img src="../assets/projects/incident-response/figure-02.png" alt="Wazuh real-time file integrity monitoring settings for the blog directory">
+            <img src="../assets/projects/incident-response/figure-02-cropped.png" alt="Wazuh real-time file integrity monitoring settings for the blog directory">
             <figcaption><span>EXHIBIT 03 · FILE INTEGRITY</span><p>The <code>/home/user/blog</code> directory was configured for real-time monitoring and checksum validation.</p></figcaption>
           </figure>
         </div>
@@ -93,7 +93,7 @@
           <p>The investigation began after unauthorized content was observed in a blog post. TheHive was used to organize the response into discrete tasks for identifying the compromise, determining the affected origin servers, mitigating those servers, finding the root cause, and restoring service.</p>
           <div class="key-finding"><span>KEY OBSERVATION</span><p>The case record connected technical evidence to assigned response actions, keeping investigation and containment work visible in one timeline.</p></div>
           <figure class="case-figure">
-            <img src="../assets/projects/incident-response/figure-05.png" alt="TheHive Identify Compromise task for a suspicious footer incident">
+            <img src="../assets/projects/incident-response/figure-05-cropped.png" alt="TheHive Identify Compromise task for a suspicious footer incident">
             <figcaption><span>EXHIBIT 04</span><p>The “Identify Compromise” task recorded the initial investigation of suspicious website content.</p></figcaption>
           </figure>
         </div>
@@ -110,7 +110,7 @@
             <div><span>EVIDENCE SOURCE</span><strong>Wazuh</strong><p>Integrity and security events supported the investigation.</p></div>
           </div>
           <figure class="case-figure">
-            <img src="../assets/projects/incident-response/figure-07.png" alt="TheHive task for mitigating compromised origin servers">
+            <img src="../assets/projects/incident-response/figure-07-cropped.png" alt="TheHive task for mitigating compromised origin servers">
             <figcaption><span>EXHIBIT 05</span><p>The containment task documented disabling affected origin servers in the load-balancer configuration.</p></figcaption>
           </figure>
         </div>
@@ -122,11 +122,11 @@
           <h2>File changes and SSH activity provided two complementary evidence paths.</h2>
           <p>Wazuh integrity events identified modified files under the monitored blog path. Security-event details exposed SSH log information, including the source address and key fingerprint used during an accepted public-key login. The authorized-keys file was then reviewed so fingerprints could be compared as part of the root-cause investigation.</p>
           <figure class="case-figure">
-            <img src="../assets/projects/incident-response/figure-09.png" alt="Wazuh SSH security event showing accepted public-key login details">
+            <img src="../assets/projects/incident-response/figure-09-cropped.png" alt="Wazuh SSH security event showing accepted public-key login details">
             <figcaption><span>EXHIBIT 06</span><p>The expanded SSH event supplied authentication details for the investigation.</p></figcaption>
           </figure>
           <figure class="case-figure">
-            <img src="../assets/projects/incident-response/figure-10.png" alt="Terminal displaying authorized SSH key fingerprints beside Wazuh event details">
+            <img src="../assets/projects/incident-response/figure-10-cropped.png" alt="Terminal displaying authorized SSH key fingerprints beside Wazuh event details">
             <figcaption><span>EXHIBIT 07</span><p>Authorized-key fingerprints were generated for comparison with the SSH event evidence.</p></figcaption>
           </figure>
         </div>
@@ -138,7 +138,7 @@
           <h2>SHA-256 comparison confirmed the blog file and its backup were different.</h2>
           <p>Hash values were calculated for the current and backup copies of the blog file. The different SHA-256 results established that the files were not identical, adding direct integrity evidence to the investigation.</p>
           <figure class="case-figure">
-            <img src="../assets/projects/incident-response/figure-13.png" alt="PowerShell SHA-256 output showing different hashes for current and backup blog files">
+            <img src="../assets/projects/incident-response/figure-13-cropped.png" alt="PowerShell SHA-256 output showing different hashes for current and backup blog files">
             <figcaption><span>EXHIBIT 08</span><p>Different SHA-256 values demonstrated a content difference between the current file and backup.</p></figcaption>
           </figure>
         </div>
@@ -154,11 +154,11 @@
           </div>
           <div class="evidence-grid">
             <figure>
-              <img src="../assets/projects/incident-response/figure-15.png" alt="TheHive template task for revoking compromised credentials">
+              <img src="../assets/projects/incident-response/figure-15-cropped.png" alt="TheHive template task for revoking compromised credentials">
               <figcaption><span>EXHIBIT 09</span><p>Credential remediation was defined as a repeatable case-template task.</p></figcaption>
             </figure>
             <figure>
-              <img src="../assets/projects/incident-response/figure-16.png" alt="TheHive template task for adding firewall rules">
+              <img src="../assets/projects/incident-response/figure-16-cropped.png" alt="TheHive template task for adding firewall rules">
               <figcaption><span>EXHIBIT 10</span><p>Firewall remediation captured blocking and access-control steps for future cases.</p></figcaption>
             </figure>
           </div>
