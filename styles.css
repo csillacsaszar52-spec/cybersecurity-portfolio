@@ -308,7 +308,7 @@ tfoot td { font-weight: 500; }
   .case-nav { gap: 12px; font-size: .68rem; }
   .case-nav .nav-cta { padding: 6px 8px; }
   .case-hero { padding-top: 125px; padding-bottom: 60px; }
-  .case-hero h1 { font-size: clamp(3.2rem, 17vw, 4.8rem); }
+  .case-hero h1 { max-width: 100%; overflow-wrap: anywhere; font-size: clamp(2.8rem, 13vw, 4.2rem); }
   .case-meta, .case-section, .evidence-grid, .case-question-grid { grid-template-columns: 1fr; }
   .case-section { gap: 30px; padding-top: 75px; padding-bottom: 75px; }
   .thumbnail-image { min-height: 270px; }
